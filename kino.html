@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Эски кино: умумий мулкдаги классик фильмлар каталоги</title>
+<meta name="description" content="Эски кино: муаллифлик ҳуқуқи тугаган классик фильмлар каталоги. Носферату, Метрополис, Чаплин фильмлари ва бошқалар. Қидирув, жанрлар ва ўз видеонгизни қўшиш.">
+<meta name="keywords" content="эски кино, классик фильмлар, умумий мулк фильмлар, Чаплин, Метрополис, Носферату, бепул кино">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Эски кино: классик фильмлар каталоги">
+<meta property="og:description" content="Умумий мулкдаги классик фильмлар: қидирув, жанрлар, муқовалар.">
+<meta property="og:type" content="website">
+<style>
+:root{--bg:#1c1526;--surface:#2a2038;--text:#f3ecdd;--muted:#b3a8c4;--accent:#f2b84b;--line:#41355a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6f1e7;--surface:#fffaf0;--text:#241a33;--muted:#6a5d7c;--accent:#9a5b00;--line:#ddd2bd}}
+:root[data-theme="dark"]{color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:Georgia,"Times New Roman",serif;line-height:1.55}
+.wrap{max-width:980px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:clamp(2rem,7vw,3.4rem);line-height:1.05;margin:12px 0 8px;letter-spacing:-.02em}
+.lead{color:var(--muted);max-width:56ch;margin:0 0 20px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+input,select,button{font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+input{flex:1;min-width:160px}
+button{cursor:pointer;background:var(--accent);color:#1c1526;border-color:var(--accent);font-weight:700}
+button.ghost{background:transparent;color:var(--text);border-color:var(--line);font-weight:400}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.poster{aspect-ratio:2/3;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:14px 22px;color:#f3ecdd;position:relative;background-image:linear-gradient(to top,rgba(0,0,0,.75),rgba(0,0,0,0) 65%),repeating-linear-gradient(135deg,rgba(255,255,255,.06) 0 2px,transparent 2px 14px)}
+.poster::before,.poster::after{content:"";position:absolute;top:0;bottom:0;width:10px;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.55) 0 8px,transparent 8px 16px)}
+.poster::before{left:6px}.poster::after{right:6px}
+.poster b{font-size:1.5rem;line-height:1.1;letter-spacing:-.01em}
+.poster span{font-size:.9rem;opacity:.85}
+.body{padding:12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.body h3{margin:0;font-size:1.1rem}
+.meta{color:var(--muted);font-size:.85rem}
+.body p{margin:0;font-size:.92rem}
+.body button{margin-top:auto}
+dialog{background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:10px;max-width:640px;width:calc(100% - 24px);padding:18px}
+dialog::backdrop{background:rgba(0,0,0,.65)}
+.cov{display:block;width:100%;border-radius:6px;margin:10px 0 12px}
+video{width:100%;border-radius:6px;background:#000;margin-top:10px}
+a.btn{display:inline-block;background:var(--accent);color:#1c1526;padding:10px 14px;border-radius:8px;font-weight:700;text-decoration:none}
+details{margin-top:28px;border-top:1px solid var(--line);padding-top:16px}
+summary{cursor:pointer;font-weight:700}
+.form{display:grid;gap:10px;margin-top:12px;max-width:480px}
+.note{color:var(--muted);font-size:.85rem}
+.empty{color:var(--muted);padding:24px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Эски кино</h1>
+  <p class="lead">Муаллифлик ҳуқуқи тугаган (умумий мулк) классик фильмлар каталоги. Фильмни расмий архивда бепул кўрасиз, ўз видеонгизни эса ўзингиз қўшиб кўрсатасиз.</p>
+
+  <div class="tools">
+    <input id="q" type="search" placeholder="Фильм номини қидиринг" aria-label="Қидирув">
+    <select id="g" aria-label="Жанр"><option value="">Барча жанрлар</option></select>
+  </div>
+
+  <div id="grid" class="grid"></div>
+
+  <details>
+    <summary>Ўз видеомни қўшиш</summary>
+    <div class="form">
+      <input id="nt" placeholder="Фильм номи">
+      <input id="nu" placeholder="Видео ҳаволаси (.mp4)" inputmode="url">
+      <label class="note" for="np">Муқова расми (ихтиёрий)</label>
+      <input id="np" type="file" accept="image/*">
+      <button id="add">Каталогга қўшиш</button>
+      <p class="note">Фақат ўзингиз суратга олган ёки ижозатингиз бор видеони қўшинг. Қўшилган видео шу саҳифа очиқ турганда сақланади.</p>
+    </div>
+  </details>
+</div>
+
+<dialog id="dlg">
+  <h2 id="dt" style="margin:0 0 4px"></h2>
+  <div id="dm" class="meta"></div>
+  <p id="dd"></p>
+  <div id="da"></div>
+  <p style="margin:14px 0 0"><button class="ghost" id="close">Ёпиш</button></p>
+</dialog>
+
+<script>
+var films=[
+{t:"Носферату",y:1922,g:"Даҳшат",d:"Ф. В. Мурнау суратга олган жимжит давр классикаси: граф Орлок ҳақидаги ҳикоя.",c:"#5b2a4a",s:"Nosferatu 1922"},
+{t:"Ойга саёҳат",y:1902,g:"Фантастика",d:"Жорж Мельеснинг машҳур қисқа фильми. Кино тарихидаги биринчи фантастика асарларидан.",c:"#2a4a6b",s:"A Trip to the Moon 1902 Melies"},
+{t:"Метрополис",y:1927,g:"Фантастика",d:"Фриц Ланг яратган келажак шаҳри ва ишчилар исёни ҳақидаги улкан фильм.",c:"#3a5a4a",s:"Metropolis 1927"},
+{t:"Бола (The Kid)",y:1921,g:"Комедия",d:"Чарли Чаплин ва кичкина етим болакай ҳақидаги самимий комедия-драма.",c:"#6b4a2a",s:"Chaplin The Kid 1921"},
+{t:"Тирик ўликлар кечаси",y:1968,g:"Даҳшат",d:"Жорж Ромеро фильми: бир уйга беркинган одамлар ва ташқаридаги хавф.",c:"#4a2a2a",s:"Night of the Living Dead 1968"},
+{t:"Замонавий замонлар",y:1936,g:"Комедия",d:"Чаплин фильми: заводдаги ишчи ва замонавий ҳаёт устидан кулги.",c:"#4a4a2a",s:"Modern Times Chaplin 1936"},
+{t:"Доктор Калигариннинг кабинети",y:1920,g:"Даҳшат",d:"Немис экспрессионизмининг энг машҳур намунаси: сирли доктор ва ухлаётган одам.",c:"#2a2a5a",s:"Cabinet of Dr. Caligari 1920"},
+{t:"Генерал",y:1926,g:"Комедия",d:"Бастер Китоннинг поезд таъқиби ҳақидаги ажойиб комедияси.",c:"#5a4a3a",s:"The General Buster Keaton 1926"}
+];
+var user=[];
+var $=function(i){return document.getElementById(i)};
+function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function all(){return films.concat(user)}
+function genres(){var set={};all().forEach(function(f){set[f.g]=1});var sel=$("g"),cur=sel.value;
+ sel.innerHTML='<option value="">Барча жанрлар</option>'+Object.keys(set).map(function(g){return '<option>'+esc(g)+'</option>'}).join("");sel.value=cur}
+function render(){
+ var q=$("q").value.trim().toLowerCase(),g=$("g").value,list=all();
+ var res=list.map(function(f,i){return {f:f,i:i}}).filter(function(o){return(!g||o.f.g===g)&&(!q||o.f.t.toLowerCase().indexOf(q)>-1)});
+ $("grid").innerHTML=res.length?res.map(function(o){var f=o.f;
+  return '<article class="card"><div class="poster" style="background-color:'+f.c+'"><b>'+esc(f.t)+'</b><span>'+(f.y?f.y:esc(f.g))+'</span></div><div class="body"><h3 style="font-size:1rem">'+esc(f.t)+'</h3><div class="meta">'+(f.y?f.y+' • ':'')+esc(f.g)+'</div><p>'+esc(f.d).slice(0,90)+'…</p><button data-i="'+o.i+'">Батафсил</button></div></article>'}).join("")
+  :'<p class="empty">Бундай фильм топилмади. Қидирувни қисқартириб кўринг.</p>';
+}
+function cover(f){if(f.p)return f.p;var c=document.createElement("canvas");c.width=960;c.height=540;var x=c.getContext("2d");x.fillStyle=f.c;x.fillRect(0,0,960,540);var g=x.createLinearGradient(0,540,0,100);g.addColorStop(0,"rgba(0,0,0,.85)");g.addColorStop(1,"rgba(0,0,0,0)");x.fillStyle=g;x.fillRect(0,0,960,540);x.fillStyle="rgba(0,0,0,.55)";for(var y=8;y<540;y+=32){x.fillRect(14,y,22,16);x.fillRect(924,y,22,16)}x.fillStyle="#f3ecdd";x.font="bold 64px Georgia,serif";x.fillText(f.t,70,440,820);x.font="28px Georgia,serif";x.fillText(f.y?f.y+" • "+f.g:f.g,70,490,820);return c.toDataURL("image/jpeg",.85)}
+function open(i){var f=all()[i];
+ $("dt").textContent=f.t;$("dm").textContent=(f.y?f.y+' • ':'')+f.g;$("dd").textContent=f.d;
+ if(f.u){$("da").innerHTML='<video controls playsinline preload="metadata"></video>';var v=$("da").firstChild;v.poster=cover(f);v.src=f.u}
+ else{$("da").innerHTML='<img class="cov" alt="" src="'+cover(f)+'"><a class="btn" target="_blank" rel="noopener" href="https://archive.org/search?query='+encodeURIComponent(f.s)+'&and[]=mediatype%3A%22movies%22">Архивда кўриш</a><p class="note">Internet Archive сайтида очилади. Фильмнинг умумий мулкда эканлигини саҳифасидаги лицензия бўлимидан текширинг.</p>'}
+ $("dlg").showModal()}
+$("grid").addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(b)open(+b.dataset.i)});
+$("q").addEventListener("input",render);$("g").addEventListener("change",render);
+$("close").addEventListener("click",function(){$("da").innerHTML="";$("dlg").close()});
+$("dlg").addEventListener("close",function(){$("da").innerHTML=""});
+$("add").addEventListener("click",function(){var t=$("nt").value.trim(),u=$("nu").value.trim();
+ if(!t||!/^https?:\/\//.test(u)){alert("Номини ва https:// билан бошланувчи видео ҳаволасини киритинг.");return}
+ var fl=$("np").files[0];var item={t:t,y:"",g:"Менинг видеоларим",d:"Ўзим қўшган видео.",c:"#3a3a4a",u:u};user.push(item);if(fl){var r=new FileReader();r.onload=function(){item.p=r.result};r.readAsDataURL(fl)}$("np").value="";
+ $("nt").value="";$("nu").value="";genres();render()});
+genres();render();
+</script>
+</body>
+</html>
